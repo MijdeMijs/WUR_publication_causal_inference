@@ -16,8 +16,8 @@ print("─" * 75)
 # Set the paths to the correct directories and files that contain the  
 # simulation and summary data. These should be saved in data/processed.
 
-summary = "data/processed/test_sum_2.csv.gz"
-simulated = "data/processed/test_sim_2.csv.gz"
+simulated = "data/processed/SIMULATION_NAME.csv.gz"         # Set simulation data path
+summary = "data/processed/SUMMARY_NAME.csv.gz"              # Set summary data path
 
 #endregion
 
@@ -37,8 +37,8 @@ df_simulated = pd.read_csv(simulated, compression="gzip")
 # It can be opend in your browser.
   
 cfun.protected_save(df_summary, 
-                    filename="FILE_NAME", 
-                    out_dir="figures/SIMULATUION_NAME", 
+                    filename="SIMULATION_NAME",             # Set filename 
+                    out_dir="figures/SIMULATION_NAME",      # Set output directory 
                     is_table=True)
 
 #endregion
@@ -47,9 +47,12 @@ cfun.protected_save(df_summary,
 
 # Set the parameter sets that you want to visualize as histigrams. Don't worry
 # if some combinations do not exist in your data. These are automatically skipped.
+# It is not necessary to set the sample size (n) or the standard deviation of Y (sd_Y).
+# These are automatically split in the plot function.  
+# MAKE SURE TO NOT CHANGE THE FORMAT!!!
 
-param_sets = {
-    "beta_0": [1],
+param_sets = {                                              # Set parameters to plot
+    "beta_0": [0, 1/3, 1, 3],
     "beta_1": [0],
     "beta_2": [0],
     "beta_3": [0],
@@ -58,17 +61,20 @@ param_sets = {
     "beta_6": [0],
     "beta_7": [0],
     "beta_8": [0],
-    "incl_var": ["('T',)", 
-                 "('T', 'M_1', 'M_2', 'Z_1', 'Z_2', 'C')"]
+    "incl_var": ["('T',)",
+                 "('T', 'M_1', 'M_2', 'Z_1', 'Z_2', 'C')"]  
 }
 
-# The function plot_param_sets() makes hostogram plots of the input data and 
-# parameters. The plots are saved to the set output directory. These plots are
-# quite rough, and are not the final fine-tuned figures. However, they do provide
-# the necessary insights into the data and are sufficient for discussions.     
+# The function plot_param_sets() makes histogram plots of the input data and 
+# parameters. The plots are saved to the set output directory. If desired,
+# confidence intervals (based on the simulation outcomes; thus empirical) can be 
+# turned on (default) or off. These plots are quite rough, and are not the final 
+# fine-tuned figures. However, they do provide the necessary insights into the 
+# data and are sufficient for discussions.     
 
 cfun.plot_param_sets(df_simulated, param_sets, 
-                     confidence=True, 
-                     out_dir="figures/test_new_fun")
+                     confidence=True,                       # Confidence intervals on (True; default) or off (False)
+                     out_dir="figures/SIMULATION_NAME"      # Set output directory
+                     )     
 
 #endregion

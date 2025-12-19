@@ -44,13 +44,13 @@ if __name__ == "__main__":
         "beta_6": [0],
         "beta_7": [0],
         "beta_8": [0],
-        "sd_Y": [1]
+        "sd_Y": [1/3, 1, 3]
     }
 
     variable_sets = [                               # Set variable sets to control (AKA regressors)
         ["T"],
-        ["T", "M_1", "M_2"], 
-        ["T", "M_1", "M_2", "Z_1", "Z_2", "C"]  
+        # ["T", "M_1", "M_2"], 
+        # ["T", "M_1", "M_2", "Z_1", "Z_2", "C"]  
     ]
 
     n_list = [10, 100, 1000]                        # Set sample size(s) 
@@ -108,8 +108,8 @@ if __name__ == "__main__":
 
     cfun.save_sim(sim_df, 
                   summary_df,
-                  sim_name="test_sim_2",            # Set name of simulation results
-                  summary_name="test_sum_2"         # Set name of summary
+                  sim_name="SIMULATION_NAME",       # Set name of simulation results
+                  summary_name="SUMMARY_NAME"       # Set name of summary
                 )
     
     #endregion
